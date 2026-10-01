@@ -1,0 +1,7 @@
+{
+  "name": "Hanashiro Zone Zero",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
