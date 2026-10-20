@@ -1,0 +1,125 @@
+<ion-content [fullscreen]="true" class="auth-content">
+  <div class="auth-bg-grid"></div>
+  <div class="auth-glow"></div>
+
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <div class="auth-logo">
+        <img src="assets/Derak.png" alt="Hanashiro Zone Zero" />
+      </div>
+
+      <h1 class="auth-title">
+        CREATE ACCOUNT
+        <span>ZONE ZERO</span>
+      </h1>
+      <p class="auth-subtitle">Join the network</p>
+
+      @if (errorMessage) {
+        <div class="auth-alert error">
+          {{ errorMessage }}
+        </div>
+      }
+
+      <form
+        class="auth-form"
+        [formGroup]="registerForm"
+        (ngSubmit)="onSubmit()"
+        novalidate
+      >
+        <ion-input
+          class="auth-field"
+          fill="outline"
+          label="Email"
+          labelPlacement="stacked"
+          type="email"
+          inputmode="email"
+          autocomplete="email"
+          autocapitalize="off"
+          spellcheck="false"
+          placeholder="you@example.com"
+          formControlName="email"
+        ></ion-input>
+        @if (submitted && email.invalid) {
+          <ion-note class="auth-error">
+            Enter a valid email address.
+          </ion-note>
+        }
+
+        <ion-input
+          class="auth-field"
+          fill="outline"
+          label="Password"
+          labelPlacement="stacked"
+          [type]="showPassword ? 'text' : 'password'"
+          autocomplete="new-password"
+          placeholder="At least 8 characters"
+          formControlName="password"
+        >
+          <ion-button
+            slot="end"
+            class="password-toggle"
+            fill="clear"
+            type="button"
+            [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'"
+            (click)="togglePassword()"
+          >
+            <ion-icon
+              slot="icon-only"
+              [name]="showPassword ? 'eye-off-outline' : 'eye-outline'"
+            ></ion-icon>
+          </ion-button>
+        </ion-input>
+        @if (submitted && password.invalid) {
+          <ion-note class="auth-error">
+            Password must be at least 8 characters.
+          </ion-note>
+        }
+
+        <ion-input
+          class="auth-field"
+          fill="outline"
+          label="Confirm password"
+          labelPlacement="stacked"
+          [type]="showConfirmPassword ? 'text' : 'password'"
+          autocomplete="new-password"
+          placeholder="Repeat your password"
+          formControlName="confirmPassword"
+        >
+          <ion-button
+            slot="end"
+            class="password-toggle"
+            fill="clear"
+            type="button"
+            [attr.aria-label]="
+              showConfirmPassword ? 'Hide password' : 'Show password'
+            "
+            (click)="toggleConfirmPassword()"
+          >
+            <ion-icon
+              slot="icon-only"
+              [name]="showConfirmPassword ? 'eye-off-outline' : 'eye-outline'"
+            ></ion-icon>
+          </ion-button>
+        </ion-input>
+        @if (submitted && registerForm.hasError('passwordMismatch')) {
+          <ion-note class="auth-error">
+            Passwords do not match.
+          </ion-note>
+        }
+
+        <ion-button
+          class="auth-submit"
+          type="submit"
+          expand="block"
+          [disabled]="submitting"
+        >
+          CREATE ACCOUNT
+        </ion-button>
+      </form>
+
+      <p class="auth-footer">
+        Already have an account? <a routerLink="/login">Sign in</a>
+      </p>
+    </div>
+  </div>
+</ion-content>

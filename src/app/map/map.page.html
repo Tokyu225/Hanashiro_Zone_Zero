@@ -1,0 +1,65 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Peta Kampus</ion-title>
+    @if (pointsCount > 0) {
+      <ion-buttons slot="end">
+        <ion-badge class="points-badge" color="primary">
+          {{ pointsCount }} titik
+        </ion-badge>
+      </ion-buttons>
+    }
+  </ion-toolbar>
+  @if (loadingPoints) {
+    <ion-progress-bar type="indeterminate"></ion-progress-bar>
+  }
+</ion-header>
+
+<ion-content>
+  <div
+    #mapContainer
+    class="leaflet-map"
+    [class.is-adding]="addingPoint"
+    aria-label="Peta lokasi kampus UGM"
+  ></div>
+
+  @if (addingPoint) {
+    <div class="map-add-hint" slot="fixed" role="status">
+      <ion-icon name="pin-outline" aria-hidden="true"></ion-icon>
+      <span>Ketuk peta untuk menaruh titik baru.</span>
+      <ion-button
+        size="small"
+        fill="clear"
+        color="light"
+        (click)="toggleAddMode()"
+      >
+        Batal
+      </ion-button>
+    </div>
+  }
+
+  @if (pointsCount > 0 && !addingPoint) {
+    <div class="map-move-hint" slot="fixed" role="note">
+      <ion-icon name="hand-left-outline" aria-hidden="true"></ion-icon>
+      <span>Klik atau tahan titik, lalu geser untuk memindahkan.</span>
+    </div>
+  }
+
+  <ion-fab
+    slot="fixed"
+    vertical="bottom"
+    horizontal="end"
+    class="map-add-fab"
+  >
+    <ion-fab-button
+      id="add-point-fab"
+      [color]="addingPoint ? 'success' : 'primary'"
+      [attr.aria-label]="
+        addingPoint ? 'Batalkan tambah titik' : 'Tambah titik baru'
+      "
+      (click)="toggleAddMode()"
+    >
+      <ion-icon [name]="addingPoint ? 'close' : 'add'"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+

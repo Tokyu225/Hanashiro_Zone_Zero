@@ -1,0 +1,346 @@
+.splash-content {
+  --background: #090d16;
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+  cursor: default;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  height: 100%;
+}
+
+/* Background Cyber Grid & Glow */
+.cyber-grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(0, 229, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 229, 255, 0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.cyber-glow-orb {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 440px;
+  height: 440px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 229, 255, 0.16) 0%, rgba(38, 198, 218, 0.06) 45%, transparent 70%);
+  filter: blur(52px);
+  pointer-events: none;
+  animation: glowPulse 4s ease-in-out infinite alternate;
+}
+
+.scanline {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    rgba(0, 0, 0, 0.25) 51%
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+  opacity: 0.35;
+}
+
+/* Splash Container - Perfectly Centered */
+.splash-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+  padding: 32px 24px;
+  position: relative;
+  z-index: 2;
+  box-sizing: border-box;
+}
+
+/* Center Content Group */
+.center-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 440px;
+}
+
+/* Kuma Mascot Showcase (Fade-in, No Extra Rings) */
+.logo-wrapper {
+  position: relative;
+  width: min(280px, 70vw);
+  height: min(280px, 70vw);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.logo-frame {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .derak-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 24px rgba(0, 229, 255, 0.3)) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.6));
+    animation: kumaFadeIn 1.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+}
+
+/* Titles */
+.title-group {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.app-title {
+  margin: 0 0 12px 0;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+
+  .title-main {
+    color: #ffffff;
+    text-shadow: 0 0 14px rgba(255, 255, 255, 0.25);
+  }
+
+  .title-accent {
+    color: #00e5ff;
+    font-size: 24px;
+    letter-spacing: 4px;
+    text-shadow: 0 0 18px rgba(0, 229, 255, 0.65);
+  }
+}
+
+/* Simple Version Text (No Pill) */
+.version-text {
+  font-size: 12px;
+  font-weight: 600;
+  color: #38bdf8;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-family: 'Courier New', Courier, monospace;
+  opacity: 0.85;
+}
+
+/* Loading Section (Positioned directly under version tag) */
+.loading-section {
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 8px;
+  box-sizing: border-box;
+}
+
+/* High-Tech Progress Bar */
+.progress-bar-track {
+  position: relative;
+  width: 100%;
+  height: 8px;
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid rgba(0, 229, 255, 0.25);
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.7);
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #0284c7, #00e5ff, #38bdf8);
+  border-radius: 4px;
+  transition: width 0.08s ease-out;
+  position: relative;
+  box-shadow: 0 0 12px rgba(0, 229, 255, 0.65);
+
+  .progress-bar-glow {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 12px;
+    background: #ffffff;
+    box-shadow: 0 0 10px #00e5ff, 0 0 18px #00e5ff;
+    opacity: 0.95;
+  }
+
+  .progress-bar-light {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.4),
+      transparent
+    );
+    animation: barShimmer 1.8s infinite;
+  }
+
+  &.complete {
+    background: linear-gradient(90deg, #059669, #10b981, #34d399);
+    box-shadow: 0 0 14px rgba(16, 185, 129, 0.75);
+
+    .progress-bar-glow {
+      box-shadow: 0 0 12px #10b981;
+    }
+  }
+}
+
+.progress-ticks {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: space-evenly;
+  pointer-events: none;
+
+  .tick {
+    width: 1px;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+  }
+}
+
+/* Status Row: Centered Spinner + Percentage (No text) */
+.status-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  margin-top: 2px;
+}
+
+.cyber-spinner {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .spinner-ring {
+    position: absolute;
+    inset: 0;
+    border: 2px solid transparent;
+    border-top-color: #00e5ff;
+    border-right-color: rgba(0, 229, 255, 0.4);
+    border-radius: 50%;
+    animation: spin 0.9s cubic-bezier(0.55, 0.15, 0.45, 0.85) infinite;
+  }
+
+  .spinner-core {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #00e5ff;
+    box-shadow: 0 0 6px #00e5ff;
+  }
+
+  &.ready {
+    .spinner-ring {
+      border-color: #10b981;
+      animation: none;
+    }
+    .spinner-core {
+      background: #10b981;
+      box-shadow: 0 0 8px #10b981;
+    }
+  }
+}
+
+.progress-percent {
+  font-size: 13px;
+  font-weight: 700;
+  color: #00e5ff;
+  font-family: 'Courier New', Courier, monospace;
+  letter-spacing: 0.8px;
+}
+
+/* User Action Hint */
+.action-hint {
+  text-align: center;
+  font-size: 11px;
+  color: rgba(148, 163, 184, 0.55);
+  letter-spacing: 1px;
+  height: 16px;
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .ready-text {
+    color: #00e5ff;
+    font-weight: 600;
+    animation: blinkDot 1s infinite alternate;
+  }
+}
+
+/* Keyframe Animations */
+@keyframes kumaFadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes glowPulse {
+  0% {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+  100% {
+    opacity: 0.9;
+    transform: translate(-50%, -50%) scale(1.15);
+  }
+}
+
+@keyframes blinkDot {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes barShimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}

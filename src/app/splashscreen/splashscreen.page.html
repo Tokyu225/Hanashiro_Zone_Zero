@@ -1,0 +1,70 @@
+<ion-content [fullscreen]="true" class="splash-content">
+  <!-- Background Cyber Elements -->
+  <div class="cyber-grid"></div>
+  <div class="cyber-glow-orb"></div>
+  <div class="scanline"></div>
+
+  <div class="splash-container">
+    <div class="center-content">
+      <!-- Mascot Logo (Fade In, No Outer Rings) -->
+      <div class="logo-wrapper">
+        <div class="logo-frame">
+          <img src="assets/Derak.png" alt="Derak" class="derak-logo" />
+        </div>
+      </div>
+
+      <!-- App Title -->
+      <div class="title-group">
+        <h1 class="app-title">
+          <span class="title-main">HANASHIRO</span>
+          <span class="title-accent">ZONE ZERO</span>
+        </h1>
+
+        <!-- Version Tag (Simple Text) -->
+        <div class="version-text">{{ version }}</div>
+      </div>
+
+      <!-- Loading Section positioned right under version tag -->
+      <div class="loading-section">
+        <!-- High-Tech Progress Bar -->
+        <div class="progress-bar-track">
+          <div
+            class="progress-bar-fill"
+            [style.width.%]="progress"
+            [class.complete]="isLoaded"
+          >
+            <div class="progress-bar-glow"></div>
+            <div class="progress-bar-light"></div>
+          </div>
+          <!-- Progress segment ticks -->
+          <div class="progress-ticks">
+            <span class="tick"></span>
+            <span class="tick"></span>
+            <span class="tick"></span>
+            <span class="tick"></span>
+          </div>
+        </div>
+
+        <!-- Status row with spinner and percentage (no extra text) -->
+        <div class="status-row">
+          <div class="cyber-spinner" [class.ready]="isLoaded">
+            <div class="spinner-ring"></div>
+            <div class="spinner-core"></div>
+          </div>
+          <span class="progress-percent">{{ progress }}%</span>
+        </div>
+
+        <!-- Status Hint (navigation is automatic once loading completes) -->
+        <div class="action-hint">
+          @if (!isLoaded) {
+            <span>Please wait&hellip;</span>
+          } @else {
+            <span class="ready-text">READY &bull; ENTERING&hellip;</span>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
+
+

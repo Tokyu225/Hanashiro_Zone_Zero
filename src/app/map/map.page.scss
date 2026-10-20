@@ -1,0 +1,235 @@
+ion-content {
+  --overflow: hidden;
+}
+
+.leaflet-map {
+  width: 100%;
+  height: 100%;
+  background: var(--ion-color-light);
+}
+
+.leaflet-map.is-adding {
+  cursor: crosshair;
+
+  :is(.leaflet-grab, .leaflet-interactive) {
+    cursor: crosshair;
+  }
+}
+
+.points-badge {
+  margin-inline-end: 12px;
+  padding: 5px 9px;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 600;
+}
+
+.map-add-fab {
+  margin: 0 16px calc(24px + env(safe-area-inset-bottom)) 0;
+}
+
+.map-add-hint,
+.map-move-hint {
+  position: absolute;
+  z-index: 800;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: calc(100% - 32px);
+  padding: 8px 10px;
+  border-radius: 12px;
+  background: rgb(15 23 42 / 88%);
+  color: #fff;
+  font-size: 0.78rem;
+  line-height: 1.35;
+  box-shadow: 0 6px 18px rgb(15 23 42 / 28%);
+  backdrop-filter: blur(6px);
+
+  ion-icon {
+    flex: none;
+    font-size: 1rem;
+  }
+}
+
+.map-add-hint {
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  ion-button {
+    --padding-start: 4px;
+    --padding-end: 4px;
+    margin: 0;
+    font-size: 0.74rem;
+    text-transform: none;
+  }
+}
+
+.map-move-hint {
+  bottom: 12px;
+  left: 12px;
+}
+
+@media (max-width: 430px) {
+  .map-add-hint {
+    white-space: normal;
+  }
+
+  .map-move-hint {
+    max-width: calc(100% - 96px);
+    font-size: 0.7rem;
+  }
+}
+
+/* Leaflet creates these elements itself, so they need to pierce view encapsulation. */
+::ng-deep .map-point-marker {
+  border: 0;
+  background: transparent;
+}
+
+::ng-deep .map-point-marker__svg {
+  display: block;
+  width: 34px;
+  height: 44px;
+  overflow: visible;
+  filter: drop-shadow(0 4px 6px rgb(15 23 42 / 35%));
+
+  path {
+    fill: var(--ion-color-primary, #3880ff);
+    stroke: #fff;
+    stroke-width: 2;
+  }
+
+  circle {
+    fill: #fff;
+  }
+}
+
+::ng-deep .map-point-marker.is-movable .map-point-marker__svg {
+  animation: map-point-bounce 0.8s ease-in-out infinite;
+}
+
+::ng-deep .map-point-marker.is-dragging {
+  z-index: 1000;
+
+  .map-point-marker__svg {
+    transform: scale(1.12);
+    filter: drop-shadow(0 9px 12px rgb(15 23 42 / 45%));
+
+    path {
+      fill: var(--ion-color-warning, #ffc409);
+    }
+  }
+}
+
+::ng-deep .map-point-marker--pending {
+  border: 0;
+  background: transparent;
+}
+
+::ng-deep .map-point-pending__pulse {
+  display: block;
+  width: 18px;
+  height: 18px;
+  margin: 4px;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  background: var(--ion-color-success, #2dd36f);
+  box-shadow: 0 0 0 0 rgb(45 211 111 / 65%);
+  animation: map-point-pulse 1.4s ease-out infinite;
+}
+
+::ng-deep .map-point-tooltip {
+  padding: 5px 9px;
+  border-radius: 8px;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+::ng-deep .map-point-popup-wrapper .leaflet-popup-content-wrapper {
+  border-radius: 12px;
+}
+
+::ng-deep .map-point-popup-wrapper .leaflet-popup-content {
+  margin: 12px 14px;
+}
+
+::ng-deep .map-point-popup {
+  min-width: 200px;
+  color: var(--ion-text-color);
+}
+
+::ng-deep .map-point-popup__title {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 0.95rem;
+  line-height: 1.25;
+}
+
+::ng-deep .map-point-popup__description {
+  margin: 0 0 6px;
+  color: var(--ion-color-step-600, #666);
+  font-size: 0.8rem;
+  line-height: 1.35;
+}
+
+::ng-deep .map-point-popup__coords {
+  margin-bottom: 9px;
+  color: var(--ion-color-step-500, #777);
+  font-size: 0.68rem;
+  letter-spacing: 0.01em;
+}
+
+::ng-deep .map-point-popup__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+::ng-deep .map-point-popup__button {
+  padding: 5px 9px;
+  border: 1px solid var(--ion-color-step-250, #ccc);
+  border-radius: 8px;
+  appearance: none;
+  background: var(--ion-color-light, #f4f5f8);
+  color: var(--ion-text-color);
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+::ng-deep .map-point-popup__button--danger {
+  border-color: #f3c4ca;
+  color: var(--ion-color-danger, #eb445a);
+}
+
+@keyframes map-point-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgb(45 211 111 / 65%);
+  }
+
+  70% {
+    box-shadow: 0 0 0 14px rgb(45 211 111 / 0%);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgb(45 211 111 / 0%);
+  }
+}
+
+@keyframes map-point-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
